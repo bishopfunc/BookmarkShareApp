@@ -6,6 +6,7 @@ from django.db.models.fields import CharField
 from django.utils import html
 from django.utils.text import slugify
 from django.core.validators import FileExtensionValidator
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
 # Create your models here.
 
 class Post(models.Model):
@@ -36,8 +37,9 @@ class Object(models.Model):
 
 class UploadFile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    bukuma_file = models.FileField(
+    bukuma_file = models.ImageField(
         upload_to='files/html',
+        storage=RawMediaCloudinaryStorage(),
         verbose_name='ブックマークファイル',
         validators=[FileExtensionValidator(['html',])],
         )

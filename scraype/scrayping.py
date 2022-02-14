@@ -10,7 +10,8 @@ from bs4 import BeautifulSoup as bs4
 # soup = bs4(open('../media/files/html/bookmarks_2021_11_10.html', encoding='utf-8'), 'html.parser')
 ### フォルダーの取得 ###
 def find_folders(path):
-    soup = bs4(open(f'media/{path}', encoding='utf-8'), 'html.parser')
+    print(path)
+    soup = bs4(open(path, encoding='utf-8'), 'html.parser')
     folders = [tag.text for tag in soup.find_all('h3')]
     return folders
 # for folder in folders:
@@ -41,7 +42,7 @@ def find_folders(path):
 ### フォルダ名でそのフォルダ内の情報を取得できる（改良）
 def search_url_text(path, folder):
     contents = []
-    soup = bs4(open(f'media/{path}', encoding='utf-8'), 'html.parser')
+    soup = bs4(open(path, encoding='utf-8'), 'html.parser')
     current_folder = soup.find(name='h3', text=folder).parent
     target_folder = current_folder.find('dl').find_all('a')
     for target in target_folder:

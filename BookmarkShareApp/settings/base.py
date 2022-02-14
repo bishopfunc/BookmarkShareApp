@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.twitter',  #add
     'allauth.socialaccount.providers.google', #add
+    'cloudinary_storage', #add
+    'cloudinary', #add
 ]
 
 MIDDLEWARE = [
