@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.db.models.query_utils import select_related_descend
 from django.forms import formset_factory
 from django.forms.models import inlineformset_factory
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -124,7 +124,7 @@ PostとObjectを編集（アップデート）するクラス
 
 class UpdatePostObjectView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        post_data = Post.objects.get(id=self.kwargs['pk'])
+        post_data = get_object_or_404(Post, id=self.kwargs['pk'])
         if request.user != post_data.user:
             messages.error(request, "あなたにはそのページへのアクセス権限がありません")
             return redirect('index')
